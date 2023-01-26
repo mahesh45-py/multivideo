@@ -2,8 +2,19 @@
 <script>
     $(document).ready(function(){
         
-        var link = `https://www.youtube.com/embed/${getParameterByName("link")}?autoplay=1&loop=1&mute=1&vq=hd144p&playlist=${getParameterByName("link")}&wmode=transparent`
+        
+        var link = `https://www.youtube.com/embed/${getParameterByName("link")}?autoplay=1&loop=1&mute=1&vq=hd144p&${getParameterByName("type")=="playlist"?"list":"playlist"}=${getParameterByName("playlist")}&wmode=transparent`
         $("#player").attr("src",link)
+
+        function onPlayerReady(event) {
+            const youtubePlayer = event.target;
+            youtubePlayer.setVolume(50); // percent
+            num = _.random(0, 5);
+            setTimeout(() => {
+              youtubePlayer.playVideoAt(num);
+            }, 1000);
+        
+          }
         
     })
     
